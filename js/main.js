@@ -59,7 +59,9 @@ $(window).load(function () {
     $(window).smartresize(bloggingisotope)
 	
 	function submit_search(){
-		window.location.href  = "file:///C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#search-input").val()
+		//window.location.href  = "file:///C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#search-input").val()
+		window.location.href  = "https://omeraliso111.github.io/?q=" + $("#search-input").val()
+		
 	}
 	
 	$("#search-button").click(function(){
