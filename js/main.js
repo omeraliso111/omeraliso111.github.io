@@ -61,7 +61,6 @@ $(window).load(function () {
 	function submit_search(){
 		//window.location.href  = "file:///C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#search-input").val()
 		window.location.href  = "https://omeraliso111.github.io/?q=" + $("#search-input").val()
-		
 	}
 	
 	$("#search-button").click(function(){
@@ -72,5 +71,9 @@ $(window).load(function () {
             submit_search();
         }
     });
-
+	$('.post-masonry').click(function(){
+		var img_src = $(this).find("img").eq(0).attr("src");
+		img_src = img_src.replace("_small", "");
+		window.open(img_src, "_blank");
+	});
 })
