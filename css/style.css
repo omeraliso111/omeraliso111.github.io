@@ -8,10 +8,26 @@ body{
 	background-color: rgba(27,27,27,0.5) !important;
 	color: white !important;
 }
+.modal-title{
+	font-family: "Montserrat", serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+}
 .modal-content{
 	border-radius: 0px !important;
 	background-color: #1b1b1b !important;
 	color: white !important;
+	font-family: "Montserrat", serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+}
+.card-title, .card-body{
+	font-family: "Montserrat", serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
 }
 .close{
 	color: white !important;
@@ -21,6 +37,18 @@ body{
 }
 .navbar-dark{
 	background-color: #1b1b1b !important;
+}
+.navbar-brand{
+	font-family: "Montserrat", serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+}
+.landing-text{
+	font-family: "Montserrat", serif;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
 }
 .brand{
 	color:white !important;
