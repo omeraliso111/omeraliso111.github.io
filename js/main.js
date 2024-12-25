@@ -1,7 +1,12 @@
 
 $(window).on('load', function () {
 	function submit_search(){
-		window.location.href  = window.location.href.split(".html")[0] + ".html?q=" + $("#searchInput").val();
+		url = window.location.href;
+		if(url.search(".io") == -1){
+			window.location.href  = "C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#searchInput").val();
+		}else{
+			window.location.href  = "https://omeraliso111.github.io/?q=" + $("#searchInput").val();
+		}
 	}
 	
 	$("#searchButton").click(function(){
