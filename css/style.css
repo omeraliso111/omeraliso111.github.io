@@ -1,0 +1,33 @@
+
+body{
+	background-image: url(../images/bg.jpg);
+	background-size:cover;
+}
+.card{
+    border-radius: 0%;
+	background-color: rgba(27,27,27,0.5) !important;
+	color: white !important;
+}
+.modal-content{
+	border-radius: 0px !important;
+	background-color: #1b1b1b !important;
+	color: white !important;
+}
+.close{
+	color: white !important;
+}
+.card-cell{
+	opacity: 0;
+}
+.navbar-dark{
+	background-color: #1b1b1b !important;
+}
+.brand{
+	color:white !important;
+}
+.instagram-link{
+	color: white !important;
+}
+.img-responsive{
+    margin:0 auto;
+}
