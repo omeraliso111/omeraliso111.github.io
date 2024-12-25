@@ -13,7 +13,7 @@
 
 
 $(window).load(function () {
-	//$("#test").remove();
+	
 	
 	var searchParams = new URLSearchParams(window.location.search)
 	if (searchParams.has('q')){
@@ -59,8 +59,8 @@ $(window).load(function () {
     $(window).smartresize(bloggingisotope)
 	
 	function submit_search(){
-		//window.location.href  = "file:///C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#search-input").val()
-		window.location.href  = "https://omeraliso111.github.io/?q=" + $("#search-input").val()
+		window.location.href  = "file:///C:/Users/admin/Desktop/desktop/projects/gallery/index.html?q=" + $("#search-input").val()
+		//	window.location.href  = "https://omeraliso111.github.io/?q=" + $("#search-input").val()
 	}
 	
 	$("#search-button").click(function(){
@@ -75,5 +75,6 @@ $(window).load(function () {
 		var img_src = $(this).find("img").eq(0).attr("src");
 		img_src = img_src.replace("_small", "");
 		window.open(img_src, "_blank");
+		
 	});
 })
