@@ -1,536 +1,139 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Getting Art</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/style.css">
-		<!--<link rel="stylesheet" href="css/templatemo-style.css">-->
-        <!--<link rel="stylesheet" href="css/templatemo-style.css">-->
-        <!---<script src="js/vendor/modernizr-2.6.2.min.js"></script>--->
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fixed Grids with Centered Image</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .fixed-top-grid, .fixed-bottom-grid {
+            width: 100%;
+            position: fixed;
+            left: 0;
+            background: #f8f9fa; /* Light gray background */
+            padding: 10px 0;
+        }
+        .fixed-top-grid { top: 0; }
+        .fixed-bottom-grid { bottom: 0; }
+        .grid-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .grid-item {
+            flex: 1;
+            padding: 10px;
+        }
+        .grid-item a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+        .image-container img {
+            max-width: 80%;
+            height: auto;
+        }
+		.twitch-container {
+            width: 80vw; /* 80% of viewport width */
+            height: calc(80vw * 9 / 16); /* Maintain 16:9 aspect ratio */
+            max-height: 80vh; /* Prevent overflow */
+            max-width: calc(80vh * 16 / 9); /* Ensure it scales properly */
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+			opacity: 0;
+        }
+		.rotate-infinite {
+			animation: rotate 10s linear infinite;
+		}
 
-        <div class="content-bg"></div>
-        <div class="bg-overlay"></div>
-		<!--
-        
-        <div class="site-top">
-            <div class="site-header clearfix">
-                <div class="container">
-                    <a href="#" class="site-brand pull-left"><strong>Getting Art</strong> Artwork in the GTA</a>
-                    <div class="social-icons pull-right">
-                        <ul>
-                            <li><a href="https://www.instagram.com/getting.art/" class="fa fa-instagram"></a></li>
-                            <li><a href="#" class="fa fa-google"></a></li>
-                            <li><a href="#" class="fa fa-pinterest"></a></li>
-                            <li><a href="#" class="fa fa-facebook"></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> 
-            <div class="site-banner">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-offset-2 col-md-8 text-center">
-                            <h2>A New Approach to Art Collection</h2>
-                            <p>Call 416-967-1111 to enquire or purchase a peice</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="search-form">
-                            <fieldset class="col-md-offset-4 col-md-3 col-sm-8">
-                                <input type="input" id="search-input" placeholder="Search for painting...">
-                            </fieldset>
-                            <fieldset class="col-md-5 col-sm-4">
-                                <button  id="search-button" class="button white">Search</button>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+		@keyframes rotate {
+			from {
+				transform: rotate(0deg);
+			}
+			to {
+				transform: rotate(360deg);
+			}
+		}
+    </style>
+</head>
+<body>
+
+    <!-- Top Grid -->
+    <div class="fixed-top-grid">
+        <div class="grid-container d-flex">
+            <div class="grid-item"><a href="#">Top Link 1</a></div>
+            <div class="grid-item"><a href="#">Top Link 2</a></div>
+            <div class="grid-item"><a href="#">Top Link 3</a></div>
         </div>
-		-->
+    </div>
 
-		<!-- Image and text
-		<nav class="navbar sticky-top navbar-dark bg-dark justify-content-center align-items-start">
-			<div class="form-inline">
-				<span class="brand h2">GETTING ART</span>
-				<a href="https://www.instagram.com/getting.art/" class="instagram-link link-offset-2 link-underline link-underline-opacity-0 link-light m-2" target="_blank">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-						<path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-					</svg>
-				</a>
-			</div>
+    <!-- Centered Image-->
+    <div class="image-container">
+        <img id="logo" src="temp-logo-png-transparent.png" class="rotate-infinite" alt="Centered Image" width="500px" height="500px">
+    </div>
+	 
+	<div class="twitch-container">
+        <iframe id="twitch"
+            src="https://player.twitch.tv/?channel=wickeddjs&parent=localhost" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Bottom Grid -->
+    <div class="fixed-bottom-grid">
+        <div class="grid-container d-flex">
+            <div class="grid-item"><a href="#">Bottom Link 1</a></div>
+            <div class="grid-item"><a href="#" onclick="fadeUp('twitch')">Twitch</a></div>
+            <div class="grid-item"><a href="#">Bottom Link 3</a></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+        function fadeUp(id) {
+			var logo = document.getElementById("logo");
+			logo.style.display = "none"
+			var element = document.getElementById(id);
+            let opacity = 0;
+            let position = 30; // Start 30px down
+            element.style.opacity = opacity;
+            element.style.transform = `translateY(${position}px)`;
+
+            let fadeInterval = setInterval(() => {
+                opacity += 0.05;
+				
+                position -= 2; // Move up slightly
+                element.style.opacity = opacity;
+                element.style.transform = `translateY(${position}px)`;
+
+                if (opacity >= 1) {
+                    clearInterval(fadeInterval);
+                }
+            }, 50);
+        }
+
+        window.onload = function() {
+            let iframe = document.getElementById("twitchFrame");
+            
 			
-			<div class="form-inline">
-				<div class="input-group">
-					<input id="searchInput" type="text" class="form-control" placeholder="Search for painting..." aria-label="Search" aria-describedby="basic-addon1">
-					<div class="input-group-append">
-						<button type="button" class="input-group-text btn btn-dark" id="searchButton">Search</button>
-					</div>
-				</div>
-			</div>
-			
-		</nav>
- --> 
-		<nav class="navbar sticky-top navbar-dark bg-dark justify-content-between">
-		  <a class="navbar-brand"><h2>GETTING ART</h2></a>
-		  <div class="form-inline">
-			<input class="form-control mr-sm-2 p-0" id="searchInput" type="search" placeholder=" Search..." aria-label="Search">
-			<button class="btn btn-outline-light my-2 my-sm-0" id="searchButton">Search</button>
-		  </div>
-		</nav>
-		
-		
-		
-		<!--- Call to Action -->
-		<div class="landing-text text-center m-5 mt-5">
-			<h2>A New Approach to Art Collection</h2>
-			<p><strong>Call 416-967-1111 to enquire or purchase a piece</strong></p>
-        </div>
-        <!-- MAIN POSTS -->
-        <div class="main-posts">
-            <div class="container">
-                <div class="row" data-masonry='{"percentPosition": true }'>
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/1.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Tranquil Mountain Retreat</h5>
-								<p class="tags d-none">Nature,Trees,River,Mountains,Sky,Clouds,Forest,Landscape,Serenity,Peaceful,Scenic,Beauty,Wilderness,Outdoors,Greenery,Tranquil,Majestic,Picturesque,Environment,Natural</p>
-								<p class="painting-description d-none">A serene landscape painting featuring a river flowing through a forest with tall, green trees on both sides. In the background, there are majestic, snow-capped mountains under a partly cloudy sky with hints of pink and blue. The scene is tranquil and picturesque, capturing the beauty of nature.</p>
-								<p>11x12 $100</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/2.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Trinity of Faces</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">art,painting,three heads,abstract,floral decorations,ornate clothing,jewelry,patterns,blue background,green background,fish,artistic,figure,central head,side heads,floral,intricate,abstract shapes,colorful,decorative</p>
-								<p class="painting-description d-none">An artistic painting depicting a figure with three heads. The central head is obscured, while the two side heads are visible and adorned with floral decorations. The figure is dressed in ornate clothing with intricate patterns and jewelry. The background features a blend of blue and green hues with abstract shapes, and there is a fish depicted on the lower left side of the image.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/3.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">The Japanese Bridge</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">bridge,pond,water, garden,bridge,pond,water,lilies,trees,bushes,green,nature,calm,wooden,curved,painting,impressionist,style,brushstrokes,scene,peaceful,art,flowers</p>
-								<p class="painting-description d-none">A painting depicting a serene garden scene with a curved wooden bridge over a pond filled with water lilies. The surrounding area is lush with greenery, including trees and bushes, creating a peaceful and natural atmosphere. The painting is characterized by its impressionistic style, with visible brushstrokes and a focus on light and color.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/4.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Surreal Melting Clocks</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">surreal,painting,melting,clocks,fish,grid,coastal,landscape,cliffs,sea,abstract,dreamlike,Salvador,art,fantasy,floating,objects,distorted,reality,imaginative,creative</p>
-								<p class="painting-description d-none">The image is a surrealistic painting featuring melting clocks, a fish, and a grid-like structure. The background shows a coastal landscape with cliffs and a calm sea. The scene is dreamlike and abstract, with objects appearing to defy the laws of physics.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/5.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Autumn Stroll</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">autumn,trees,pathway,street lamps,umbrella,vibrant colors,red leaves,orange leaves,yellow leaves,expressive brushstrokes,dynamic,lively,person walking,evening,illuminated,nature,park,colorful,scenic,landscape</p>
-								<p class="painting-description d-none">This painting depicts a vibrant autumn scene with a pathway lined with trees whose leaves are in shades of red, orange, and yellow. The pathway is illuminated by street lamps, and there is a person holding an umbrella walking along the path. The use of bold, expressive brushstrokes and vivid colors creates a lively and dynamic atmosphere.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/6.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Celestial Dreamscape</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">night,sky,stars,moon,mountains,river,forest,trees,red leaves,surreal,fantasy,landscape,ethereal,glowing,celestial,dreamlike,nature,vibrant,painting,scenery</p>
-								<p class="painting-description d-none">This painting depicts a surreal and fantastical landscape with a vibrant night sky filled with stars and a large, glowing moon. The scene features towering mountains in the background, a winding river, and a forest with prominently red-leaved trees in the foreground. The sky has an ethereal quality with swirling colors and celestial elements, creating a dreamlike atmosphere.	</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/8.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Girl with a Pearl Earring</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">girl, pearl, earring, headscarf, blue, yellow, painting, art, famous, light, texture, portrait, classic, Dutch, Vermeer, 17th century, masterpiece, museum, canvas, realism</p>
-								<p class="painting-description d-none">This image shows a famous painting of a girl wearing a blue and yellow headscarf and a pearl earring. The painting is known for its detailed depiction of light and texture, making it a significant work in art history.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/9.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Curious Kitten on the Palette</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">kitten, cat, painting, palette, art supplies, brush, glass, water, tube, paint, curiosity, exploration, texture, fabric, table, still life, animal, artist, scene, detailed</p>
-								<p class="painting-description d-none">This painting depicts a small kitten standing on an artist's palette, surrounded by various painting supplies. The kitten appears to be curiously exploring the area, with its paw on the palette and its gaze focused downward. The background features a textured fabric, adding depth to the scene. The painting captures a moment of innocent curiosity and the juxtaposition of the delicate kitten with the artist's tools.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/11.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Blurred Spectrum Portrait</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">abstract, colorful, face, portrait, red, purple, green, blue, blurred, hues, vibrant, scribbled, lines, artistic, painting, spectrum, expression, modern, art, creative</p>
-								<p class="painting-description d-none">The painting shows an abstract, colorful depiction of a face. The left side of the face is dominated by shades of red and purple, while the right side is blurred with green and blue hues. The bottom part of the image has dark, scribbled lines. The abstract nature and use of vibrant colors make it visually interesting.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/12.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Sunset Reflections</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">sunset, reflections, landscape, sky, water, grass, field, trees, silhouette, orange, pink, yellow, gradient, serene, tranquil, dreamy, impressionistic, brushstrokes, nature, evening</p>
-								<p class="painting-description d-none">This painting depicts a serene landscape with a vibrant sunset sky. The sky is painted with hues of orange, pink, and yellow, blending into a soft gradient. Below, a reflective body of water winds through a grassy field, capturing the colors of the sky. In the distance, there are silhouettes of trees and possibly a small structure. The brushstrokes are loose and impressionistic, giving the painting a dreamy and tranquil quality</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/13.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Blurred Beauty</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">woman, painting, art, famous, portrait, serene, hands, crossed, landscape, mountains, path, detailed, realistic, mysterious, expression, blurred, face, background, classic, masterpiece</p>
-								<p class="painting-description d-none">This painting shows a woman with a serene expression, seated with her hands crossed in front of her. The background features a landscape with mountains and a winding path. However, the face of the woman is blurred out, which adds a mysterious element to the image.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/14.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Golden Reflections</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">landscape, painting, sunset, sunrise, water, reflection, trees, sky, clouds, nature, serene, calm, horizon, forest, golden, tranquil, scenic, art, texture, peaceful</p>
-								<p class="painting-description d-none">This painting depicts a serene landscape featuring a calm body of water reflecting the surrounding scenery. The sky is filled with a mix of clouds and the warm hues of a setting or rising sun, casting a golden glow over the scene. The horizon is lined with trees, with a dense cluster on the right side of the painting. The use of texture and color creates a sense of depth and tranquility.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/15.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Graceful Ballerina</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">ballerina, dance, art, painting, elegance, grace, tutu, flowers, abstract, geometric, blue, yellow, textured, three-dimensional, frame, wall art, interior design, decor, ballet, pose</p>
-								<p class="painting-description d-none">The image shows a painting of a ballerina in a graceful pose, with one arm extended upwards and one leg lifted. The ballerina is depicted in a textured, three-dimensional style with a detailed tutu adorned with yellow and blue flowers. The background consists of abstract, geometric shapes in shades of blue and gray, adding depth and contrast to the figure. The painting is framed and displayed in a well-lit, elegant room.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/16.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Serene Contemplation</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">painting, art, saree, red, blue, chair, sitting, person, blurred face, curtain, wall, calm, elegant, serene, contemplative, traditional, clothing, pose, interior, portrait</p>
-								<p class="painting-description d-none">This painting depicts a person sitting on a chair, dressed in a red saree with a blue blouse. The background features a light-colored wall and a curtain. The person’s face is blurred, and the overall composition suggests a calm and contemplative mood. The use of colors and the pose of the person add a sense of elegance and serenity to the artwork.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/17.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Vibrant Cityscape by the Water</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">cityscape, abstract, colorful, vibrant, buildings, water, bridge, mountains, sky, stripes, trees, landscape, modern, art, painting, bright, geometric, nature, urban, scenic</p>
-								<p class="painting-description d-none">This painting is a colorful, abstract representation of a cityscape by a body of water. The city is depicted with vibrant, block-like buildings in various colors, including yellow, orange, red, blue, and green. The background features a blue body of water with a white bridge and distant mountains. The sky is illustrated with vertical stripes of multiple colors, adding a dynamic and lively feel to the artwork. The foreground includes stylized green trees and a green landscape.></p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/18.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Woman with Oysters</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">woman, oysters, table, blue cloth, red garment, fur trim, interior, jug, glass, knife, reflection, background figure, dark background, eating, preparing, food, domestic scene, 17th century, Dutch painting, still life</p>
-								<p class="painting-description d-none">The painting depicts a woman in a red and white fur-trimmed garment, seated at a table covered with a blue cloth. She appears to be engaged in preparing or eating oysters, as there are several oysters and a knife on the table. The setting is an interior space with a dark background, and there is a jug and a glass on the table. In the background, there is a mirror or a painting reflecting another figure.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/19.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Cascade of Colors</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">abstract, painting, art, colorful, vibrant, brushstrokes, gold leaf, metallic, gradient, lavender, pastel, dynamic, lively, canvas, multicolored, cascading, contrast, design, artistic, modern</p>
-								<p class="painting-description d-none">The painting features an abstract design with vibrant, multicolored brushstrokes cascading downwards from the top of the canvas. The colors blend into each other, creating a dynamic and lively effect. The bottom portion of the painting includes a section of gold leaf, adding a metallic sheen and contrast to the colorful strokes above. The background transitions from a light,
- almost pastel gradient at the top to a solid lavender color at the bottom.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/20.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Vibrant Landscape</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">abstract, painting, art, vibrant, colors, green, pink, yellow, landscape, trees, nature, brushstrokes, expressive, dynamic, lively, shapes, forms, composition, M. Anderson, signature</p>
-								<p class="painting-description d-none">This painting is an abstract piece featuring a blend of vibrant colors, primarily greens, pinks, and yellows. The composition includes various shapes and forms that suggest a natural landscape with trees and possibly a body of water. The use of bold, expressive brushstrokes and the interplay of colors create a dynamic and lively scene. The artist's signature, "M. Anderson," is visible in the bottom right corner.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/21.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Afternoon in the Park</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">women, park, nature, conversation, impressionism, greenery, trees, outdoor, hat, dress, seated, standing, summer, leisure, friendship, serene, landscape, brushstrokes, painting, art</p>
-								<p class="painting-description d-none">This painting depicts two women in a lush, green outdoor setting. One woman is seated, wearing a blue dress and a hat, while the other woman, dressed in a light-colored outfit, is bending over, seemingly engaged in conversation or examining something in the seated woman's hand. The background features a verdant landscape with trees and a hint of a body of water, suggesting a serene, park-like environment. The brushstrokes are loose and impressionistic, giving the painting a soft, dreamy quality.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/22.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Dream Apparatus</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">abstract, surreal</p>
-								<p class="painting-description d-none">This painting depicts a surreal scene where a person is lying in bed with a wooden structure above. From the structure, a variety of objects and creatures, including fish and other organic forms, appear to be emerging and flowing towards the person's mouth. The background features a barren landscape with two celestial bodies, one resembling the sun and the other the moon. The painting is rich in symbolism and evokes a dream-like or nightmarish quality.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/23.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Fluid Harmony</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">abstract, painting, colors, blue, pink, orange, green, fluid, dynamic, brushstrokes, blending, movement, depth, visual, engaging, interpretation, art, vibrant, soft, composition</p>
-								<p class="painting-description d-none">The painting features an abstract composition with a blend of soft and vibrant colors. The colors include shades of blue, pink, orange, and green, creating a fluid and dynamic visual effect. The brushstrokes and blending techniques give the painting a sense of movement and depth, making it visually engaging and open to interpretation.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/24.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Starry Night</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">night, sky, stars, moon, cypress, tree, town, village, swirling, patterns, blue, yellow, vibrant, brushstrokes, painting, famous, art, landscape, Van Gogh, masterpiece</p>
-								<p class="painting-description d-none">The painting depicts a swirling night sky filled with bright stars and a crescent moon. Below the sky, there is a small town with a prominent dark cypress tree in the foreground. The vibrant colors and dynamic brushstrokes create a sense of movement and emotion.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/25.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Rainbow Zebra</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">zebra, rainbow, colorful, stripes, animal, painting, art, sky, clouds, mane, vibrant, whimsical, unique, creative, spectrum, nature, surreal, fantasy, bright, signature</p>
-								<p class="painting-description d-none">This painting depicts a zebra with rainbow-colored stripes instead of the traditional black and white. The background is a gradient of blue and white, with a few small clouds, giving the impression of a sky. The zebra's mane also features a spectrum of colors, adding to the vibrant and whimsical nature of the artwork. The artist's signature, "P. Everson," is visible in the bottom left corner.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/26.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Radiant Bloom</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">flower, floral, abstract, painting, art, vibrant, colorful, luminous, ethereal, dynamic, bold, brushstrokes, yellow, orange, white, blue, red, purple, central, arrangement, energy</p>
-								<p class="painting-description d-none">This painting depicts a vibrant and abstract floral arrangement with a central focus on a large, luminous flower in shades of yellow, orange, and white. The background is a blend of various colors, including blue, red, and purple, creating a dynamic and ethereal atmosphere. The painting is visually striking due to its use of bold colors and fluid brushstrokes, giving it a sense of movement and energy.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/27.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Vibrant Canine</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">dog, painting, colorful, vibrant, art, animal, pet, bright, abstract, splatter, brushstrokes, dynamic, lively, energetic, multicolored, creative, expressive, modern, artistic, eye-catching</p>
-								<p class="painting-description d-none">The painting depicts a colorful dog, rendered with vibrant reds, yellows, blues, and greens. The dynamic brushstrokes and splatters give the piece a lively and energetic feel, making it visually striking and engaging.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/28.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Modern Scream</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">painting, art, bridge, person, sky, swirls, vibrant, colorful, expressive, distress, contemplation, figures, background, foreground, orange, yellow, red, blue, green, dynamic, intense</p>
-								<p class="painting-description d-none">This painting is a colorful and expressive artwork depicting a person standing on a bridge with a swirling, vibrant sky in the background. The sky is filled with intense shades of orange, yellow, and red, while the water below is depicted with dynamic blue and green swirls. The person in the foreground appears to be in a state of distress or contemplation, and there are two other figures in the background on the bridge. The painting is reminiscent of Edvard Munch's "The Scream."</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/29.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Majestic Mountain Cascade</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">mountain, waterfall, river, rocks, snow, peak, landscape, nature, greenery, trees, serene, majestic, painting, art, scenery, outdoors, wilderness, beauty, peaceful, tranquil</p>
-								<p class="painting-description d-none">This painting depicts a majestic mountain landscape with a prominent snow-capped peak in the background. Below the mountain, there is a cascading waterfall flowing into a river surrounded by rocky terrain. The scene includes lush greenery and trees, adding to the natural beauty of the setting. The painting captures the serene and awe-inspiring essence of nature.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/30.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Sunset Over the City</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">cityscape, sunset, skyline, tower, buildings, reflection, water, vibrant, colorful, urban, modern, architecture, evening, horizon, lights, sky, red, orange, purple, painting</p>
-								<p class="painting-description d-none">This painting depicts a vibrant cityscape at sunset, featuring a prominent tower and a mix of modern buildings. The sky is painted in vivid hues of red, orange, and purple, reflecting beautifully on the water below. The scene is dynamic and colorful, capturing the essence of an urban skyline during a dramatic sunset.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/31.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Reflections at Dusk</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">seascape, painting, water, sky, clouds, reflections, sunset, dusk, landscape, art, ocean, horizon, pastel, brushstrokes, texture, serene, peaceful, nature, light, colors</p>
-								<p class="painting-description d-none">This painting depicts a serene seascape with a focus on the interplay of light and water. The sky is filled with soft, pastel-colored clouds, reflecting hues of pink, blue, and gold onto the water below. The water itself is a mix of deep blues and lighter shades, capturing the movement and reflections of the sky. There is a dark landmass or cliff in the distance, adding depth to the composition. The brushstrokes are textured and expressive, giving the painting a dynamic and lively feel.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-
-					<div class="card-cell col-md-4 col-sm-6 mb-4">
-						<div class="card p-2">
-							<img class="card-img-top" src="images/32.jpg" alt="">
-							<div class="card-body">
-								<h5 class="card-title">Tranquil Harmony in an Ancient Landscape</h5>
-								<p>11x12 $100</p>
-								<p class="tags d-none">landscape, mountains, river, traditional, East Asian, architecture, boats, people, leisure, nature, trees, birds, sky, waterfall, harmony, culture, serene, peaceful, detailed, idyllic</p>
-								<p class="painting-description d-none">This painting depicts a serene and idyllic landscape featuring traditional East Asian architecture, lush mountains, flowing rivers, and various figures engaging in leisurely activities. The scene is rich with detail, including boats on the river, people in traditional attire, and birds flying in the sky. The use of soft colors and intricate details creates a harmonious and peaceful atmosphere, making it both visually captivating and culturally significant.</p>
-							</div>
-						</div>
-					</div> <!-- /.post-masonry -->
-					
-						
-                </div>
-            </div>
-        </div>
-		
-		<div class="modal fade" id="paintingModal" tabindex="-1" role="dialog" aria-labelledby="paintingModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-xl" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="paintingModalLabel">Celestial Dreamscape</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body mb-5">
-						<div class="container">
-							<div class="row align-items-center">
-								<div class="col-md-6 col-sm-12">
-									<img class="img-fluid" src="images/6.jpg" alt="">
-								</div>
-								<div class="col-md-6 col-sm-12 modal-text pt-3">
-									<span class="align-middle">
-										This painting depicts a surreal and fantastical landscape with a vibrant night sky filled with stars and a large, glowing moon. The scene features towering mountains in the background, a winding river, and a forest with prominently red-leaved trees in the foreground. The sky has an ethereal quality with swirling colors and celestial elements, creating a dreamlike atmosphere.	
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						button type="button" class="btn btn-primary">Save changes</button>-
-						
-					</div>
-					-->
-
-				</div>
-			</div>
-		</div>
-
-        <!-- FOOTER -->
-        <footer class="site-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <p class="copyright-text">Copyright &copy; 2024 Getting Art
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-		<script src="js/before.js"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
-        <!---<script src="js/min/plugins.min.js"></script>--->
-		<script src="js/main.js"></script>
-
-	<!-- templatemo 434 masonry -->
-    </body>
+        };
+    </script>
+</body>
 </html>
