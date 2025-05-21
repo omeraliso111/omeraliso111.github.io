@@ -1,139 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fixed Grids with Centered Image</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!DOCTYPE html><html><head><title>Ear Training</title></head>
+<body style="background-color:black; color:white">
+    <p>Tempo <input id="tempo" type="number" placeholder="1"></p>
+	<p>Repeat<input id="repeat" type="number" placeholder="3"></p>
+    <p>Note Count <input id="note_count" type="number" placeholder="2"></p>
+    <button onclick="update()"><h3>Update</h3></button>
+	<button onclick="stop()"><h3>Stop</h3></button>
 	
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .fixed-top-grid, .fixed-bottom-grid {
-            width: 100%;
-            position: fixed;
-            left: 0;
-            background: #f8f9fa; /* Light gray background */
-            padding: 10px 0;
-        }
-        .fixed-top-grid { top: 0; }
-        .fixed-bottom-grid { bottom: 0; }
-        .grid-container {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
-        .grid-item {
-            flex: 1;
-            padding: 10px;
-        }
-        .grid-item a {
-            text-decoration: none;
-            font-weight: bold;
-            color: #007bff;
-        }
-        .image-container {
-            text-align: center;
-            margin-top: 80px;
-            margin-bottom: 80px;
-        }
-        .image-container img {
-            max-width: 80%;
-            height: auto;
-        }
-		.twitch-container {
-            width: 80vw; /* 80% of viewport width */
-            height: calc(80vw * 9 / 16); /* Maintain 16:9 aspect ratio */
-            max-height: 80vh; /* Prevent overflow */
-            max-width: calc(80vh * 16 / 9); /* Ensure it scales properly */
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-			opacity: 0;
-        }
-		.rotate-infinite {
-			animation: rotate 10s linear infinite;
+
+    <audio id="audio" src="notes/50.wav"></audio>
+	
+	
+
+    <script>
+		var notes_length = 64
+		var tempo = 2
+		var repeat = 3;
+		var note_count = 2
+		var delay = 1000/tempo;
+		
+		var notes = Array(2*3*3*2).fill(0); //2 notes x 3 bars x 3 unique second notes x spaces
+		var note_index = 0;
+		var repeat_index = 0;
+		var pause = false;
+		
+		if (localStorage.getItem('tempo') !== null){
+			tempo = localStorage.getItem('tempo');
+			repeat = localStorage.getItem('repeat');
+			note_count = localStorage.getItem('note_count');
+			document.getElementById('tempo').value = tempo;
+			document.getElementById('note_count').value = note_count;
+			document.getElementById("repeat").value = repeat;
 		}
-
-		@keyframes rotate {
-			from {
-				transform: rotate(0deg);
-			}
-			to {
-				transform: rotate(360deg);
-			}
+		
+		function update(){
+			tempo = document.getElementById("tempo");
+			note_count = document.getElementById("note_count");
+			var delay = int(1000/tempo);
+            localStorage.setItem("tempo", tempo);
+            localStorage.setItem("note_count", note_count);	
+			localStorage.setItem("repeat", repeat);
 		}
-    </style>
-</head>
-<body>
+        
+		restart();
 
-    <!-- Top Grid -->
-    <div class="fixed-top-grid">
-        <div class="grid-container d-flex">
-            <div class="grid-item"><a href="#">Top Link 1</a></div>
-            <div class="grid-item"><a href="#">Top Link 2</a></div>
-            <div class="grid-item"><a href="#">Top Link 3</a></div>
-        </div>
-    </div>
-
-    <!-- Centered Image-->
-    <div class="image-container">
-        <img id="logo" src="temp-logo-png-transparent.png" class="rotate-infinite" alt="Centered Image" width="500px" height="500px">
-    </div>
-	 
-	<div class="twitch-container">
-        <iframe id="twitch"
-            src="https://player.twitch.tv/?channel=wickeddjs&parent=omeraliso111.github.io"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- Bottom Grid -->
-    <div class="fixed-bottom-grid">
-        <div class="grid-container d-flex">
-            <div class="grid-item"><a href="#">Bottom Link 1</a></div>
-            <div class="grid-item"><a href="#" onclick="fadeUp('twitch')">Twitch</a></div>
-            <div class="grid-item"><a href="#">Bottom Link 3</a></div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script>
-        function fadeUp(id) {
-			var logo = document.getElementById("logo");
-			logo.style.display = "none"
-			var element = document.getElementById(id);
-            let opacity = 0;
-            let position = 30; // Start 30px down
-            element.style.opacity = opacity;
-            element.style.transform = `translateY(${position}px)`;
-
-            let fadeInterval = setInterval(() => {
-                opacity += 0.05;
-				
-                position -= 2; // Move up slightly
-                element.style.opacity = opacity;
-                element.style.transform = `translateY(${position}px)`;
-
-                if (opacity >= 1) {
-                    clearInterval(fadeInterval);
-                }
-            }, 50);
-        }
-
-        window.onload = function() {
-            let iframe = document.getElementById("twitchFrame");
-            
+        function update() {
+			//console.log("here");
+			//tempo = document.getElementById("tempo").value;
+			//note_count = document.getElementById("note_count").value;
+			//repeat = document.getElementById("repeat").value;
+			//delay = 1000/tempo;
 			
-        };
+			clearInterval(audioInterval);
+			restart();
+		}
+		
+		var audio = document.getElementById("audio");
+		function restart(){
+			
+			notes[0] = getRandomInt(30, notes_length - 8, []);
+			notes[1] = notes[0] + getRandomInt(-7, 7, [0]);
+			notes[2] = -1;
+			notes[3] = -1;
+			notes[4] = notes[0];
+			notes[5] = notes[1];
+			notes[6] = -1;
+			notes[7] = -1;
+			notes[8] = notes[0];
+			notes[9] = notes[1];
+			notes[10] = -1;
+			notes[11] = -1;
+			
+			notes[12] = notes[0]
+			notes[13] = notes[0] + getRandomInt(-7, 7, [0]);
+			notes[14] = -1;
+			notes[15] = -1;
+			notes[16] = notes[0];
+			notes[17] = notes[13];
+			notes[18] = -1;
+			notes[19] = -1;
+			notes[20] = notes[0];
+			notes[21] = notes[13];
+			notes[22] = -1;
+			notes[23] = -1;
+			
+			notes[24] = notes[0]
+			notes[25] = notes[0] + getRandomInt(-7, 7, [0]);
+			notes[26] = -1;
+			notes[27] = -1;
+			notes[28] = notes[0];
+			notes[29] = notes[25];
+			notes[30] = -1;
+			notes[31] = -1;
+			notes[32] = notes[0];
+			notes[33] = notes[25];
+			notes[34] = -1;
+			notes[35] = -1;
+			
+			delay = 1000;
+			audioInterval = setInterval(() => {
+				console.log(note_index + ": " + notes[note_index]);
+				if(notes[note_index] != -1){
+					audio.src = "notes/" + notes[note_index] + ".wav";
+					audio.play();
+				}
+				note_index += 1;
+				if(note_index >= notes.length){
+					note_index = 0;
+					update();
+				}
+            }, delay);
+		}
+		function stop(){
+			clearInterval(audioInterval);
+		}
+		function getRandomInt(min, max, exceptions = []) {
+			var n =	Math.floor(Math.random() * (max - min + 1)) + min;
+			while (exceptions.includes(n)){
+				n =	Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+			return n;
+			
+		}
+
+let randomInt = getRandomInt(1, 10);
     </script>
+
 </body>
 </html>
+
+
