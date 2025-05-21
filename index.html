@@ -71,7 +71,7 @@
 			notes[11] = -1;
 			
 			notes[12] = notes[0]
-			notes[13] = notes[0] + getRandomInt(-7, 7, [0]);
+			notes[13] = notes[0] + getRandomInt(-7, 7, [0, notes[1]]);
 			notes[14] = -1;
 			notes[15] = -1;
 			notes[16] = notes[0];
@@ -84,7 +84,7 @@
 			notes[23] = -1;
 			
 			notes[24] = notes[0]
-			notes[25] = notes[0] + getRandomInt(-7, 7, [0]);
+			notes[25] = notes[0] + getRandomInt(-7, 7, [0, notes[1], notes[13]]);
 			notes[26] = -1;
 			notes[27] = -1;
 			notes[28] = notes[0];
@@ -96,7 +96,7 @@
 			notes[34] = -1;
 			notes[35] = -1;
 			
-			delay = 1000;
+			delay = 500;
 			audioInterval = setInterval(() => {
 				console.log(note_index + ": " + notes[note_index]);
 				if(notes[note_index] != -1){
